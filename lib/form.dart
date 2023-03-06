@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'details.dart';
 
+
 class MyForm extends StatefulWidget {
   const MyForm({Key? key}) : super(key: key);
 
@@ -8,24 +9,59 @@ class MyForm extends StatefulWidget {
   State<MyForm> createState() => _MyFormState();
 }
 
+
 class _MyFormState extends State<MyForm> {
+  var _prod;
+  final _productController = TextEditingController();
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    _productController.addListener(_updateText);
+  }
+
+  void _updateText(){
+    setState((){
+      _prod = _productController.text;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Form"),
-        centerTitle: true,
+        title: const Text("Form"), centerTitle: true,),
+        body: Container(
+          padding: EdgeInsets.all(20.0),
+          child: ListView(
+            children: [
+              TextFormField(
+                controller: _productController,
+                decoration: InputDecoration(
+                  hintText: "Product Name",
+                  icon: Icon(Icons.verified_user_outlined),
+                  border: OutlineInputBorder()
+                ),
+              ),
+              SizedBox(height: 20.0,),
+              myBtn(context),
+            ],
+          ),
+
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: Text("Submit Form"),
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Datails();
-            }));
-          },
-        ),
-      ),
+    );
+  }
+
+  ElevatedButton myBtn(BuildContext context) {
+    return ElevatedButton(
+      child: Text("Submit Form"),
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Datails();
+        }));
+      },
     );
   }
 }
