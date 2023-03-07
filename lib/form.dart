@@ -11,7 +11,7 @@ class MyForm extends StatefulWidget {
 
 
 class _MyFormState extends State<MyForm> {
-  var _prod;
+  var prod;
   final _productController = TextEditingController();
 
 
@@ -24,7 +24,7 @@ class _MyFormState extends State<MyForm> {
 
   void _updateText(){
     setState((){
-      _prod = _productController.text;
+      prod = _productController.text;
     });
   }
 
@@ -56,10 +56,11 @@ class _MyFormState extends State<MyForm> {
 
   ElevatedButton myBtn(BuildContext context) {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
       child: Text("Submit Form"),
       onPressed: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Datails();
+          return Datails(prod: _productController.text);
         }));
       },
     );

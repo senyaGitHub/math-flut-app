@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Datails extends StatelessWidget {
-  const Datails({Key? key}) : super(key: key);
-
+  Datails({Key? key, required this.prod}) : super(key: key);
+    String prod;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,6 +12,17 @@ class Datails extends StatelessWidget {
             Navigator.pop(context);
           }, icon: Icon(Icons.arrow_back)),
         ),
+      body: Container(
+        padding: EdgeInsets.all(20.0),
+        child: ListView(
+          children: [
+            ListTile(
+              leading: Icon(Icons.account_balance_wallet_outlined),
+              title: Text(prod),
+            )
+          ],
+        ),
+      ),
       );
   }
 }
