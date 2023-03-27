@@ -31,20 +31,20 @@ class _MyFormState extends State<MyForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Form"), centerTitle: true,),
+      //appBar: AppBar(
+        //title: const Text("Form"), centerTitle: true,),
         body: Container(
           padding: EdgeInsets.all(20.0),
           child: ListView(
-            children: [
-              TextFormField(
-                controller: _productController,
-                decoration: InputDecoration(
-                  hintText: "Product Name",
-                  icon: Icon(Icons.verified_user_outlined),
-                  border: OutlineInputBorder()
-                ),
-              ),
+             children: [
+            //   TextFormField(
+            //     controller: _productController,
+            //     decoration: InputDecoration(
+            //       hintText: "Product Name",
+            //       icon: Icon(Icons.verified_user_outlined),
+            //       border: OutlineInputBorder()
+            //     ),
+            //   ),
               SizedBox(height: 20.0,),
               myBtn(context,"Play"),
               myBtn(context, "Options"),
