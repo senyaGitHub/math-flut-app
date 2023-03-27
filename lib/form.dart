@@ -46,7 +46,8 @@ class _MyFormState extends State<MyForm> {
                 ),
               ),
               SizedBox(height: 20.0,),
-              myBtn(context),
+              myBtn(context,"Play"),
+              myBtn(context, "Options"),
             ],
           ),
 
@@ -54,15 +55,20 @@ class _MyFormState extends State<MyForm> {
     );
   }
 
-  ElevatedButton myBtn(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(minimumSize: const Size(200, 50)),
-      child: Text("Submit Form"),
-      onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Datails(prod: _productController.text);
-        }));
-      },
+   myBtn(BuildContext , text) {
+    return SizedBox(
+      width: 100, // set the button width
+      height: 75, // set the button height
+      child: TextButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the background color to gray
+          foregroundColor: MaterialStateProperty.all<Color>(Colors.black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+        ),
+        onPressed: () {
+          // button pressed action
+        },
+        child: Text('Click me'), // set the button text
+      ),
     );
   }
 }
