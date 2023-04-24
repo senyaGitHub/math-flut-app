@@ -2,105 +2,115 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MathGame());
+  runApp(
+    MaterialApp(
+      title: 'Math Quiz Game',
+      initialRoute: '/game-menu',
+      routes: {
+        '/game-menu': (context) => GameMenu(),
+        '/game': (context) => Game(),
+      },
+    ),
+  );
 }
 
-class MathGame extends StatefulWidget {
+class GameMenu extends StatelessWidget {
   @override
-  _MathGameState createState() => _MathGameState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Math Quiz Game'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Welcome to Math Quiz Game',
+              style: TextStyle(fontSize: 24.0),
+            ),
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/game');
+              },
+              child: Text('Start Game'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _MathGameState extends State<MathGame> {
-  int num1 = 0;
-  int num2 = 0;
+class Game extends StatefulWidget {
+  @override
+  _GameState createState() => _GameState();
+}
+
+class _GameState extends State<Game> {
+  int num1 = Random().nextInt(100);
+  int num2 = Random().nextInt(100);
   int answer = 0;
-  int userAnswer = 0;
   int score = 0;
 
-  void _generateQuestion() {
+  void checkAnswer(int userAnswer) {
     setState(() {
-      num1 = Random().nextInt(10);
-      num2 = Random().nextInt(10);
-      answer = num1 + num2;
-      userAnswer = 0;
-    });
-  }
-
-  void _checkAnswer(int choice) {
-    setState(() {
-      if (choice == answer) {
-        score += 1;
+      if (userAnswer == answer) {
+        score++;
+      } else {
+        score--;
       }
-      _generateQuestion();
+      num1 = Random().nextInt(100);
+      num2 = Random().nextInt(100);
+      answer = num1 + num2;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _generateQuestion();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Math Game',
-      home: Scaffold(
-        body: Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(
-                'Score: $score',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Math Quiz Game'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '$num1 + $num2 = ?',
+              style: TextStyle(fontSize: 24.0),
+            ),
+            SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    checkAnswer(num1 + num2);
+                  },
+                  child: Text('${num1 + num2}'),
                 ),
-              ),
-              Text(
-                '$num1 + $num2 = ?',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+                ElevatedButton(
+                  onPressed: () {
+                    checkAnswer(Random().nextInt(200));
+                  },
+                  child: Text('${Random().nextInt(200)}'),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _checkAnswer(0);
-                    },
-                    child: Text('${Random().nextInt(20)}'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _checkAnswer(1);
-                    },
-                    child: Text('${Random().nextInt(20)}'),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _checkAnswer(2);
-                    },
-                    child: Text('${Random().nextInt(20)}'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _checkAnswer(3);
-                    },
-                    child: Text('$answer'),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ElevatedButton(
+                  onPressed: () {
+                    checkAnswer(Random().nextInt(200));
+                  },
+                  child: Text('${Random().nextInt(200)}'),
+                ),
+              ],
+            ),
+            SizedBox(height: 20.0),
+            Text(
+              'Score: $score',
+              style: TextStyle(fontSize: 24.0),
+            ),
+          ],
         ),
       ),
     );
