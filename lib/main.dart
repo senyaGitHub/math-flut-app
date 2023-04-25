@@ -9,6 +9,7 @@ void main() {
       routes: {
         '/game-menu': (context) => GameMenu(),
         '/game': (context) => Game(),
+        '/options': (context) => Options(),
       },
     ),
   );
@@ -18,9 +19,6 @@ class GameMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Math Quiz Game'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -30,12 +28,9 @@ class GameMenu extends StatelessWidget {
               style: TextStyle(fontSize: 24.0),
             ),
             SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/game');
-              },
-              child: Text('Start Game'),
-            ),
+            playButton(context),
+            SizedBox(height: 20.0),
+            optionsButton(context),
           ],
         ),
       ),
@@ -115,4 +110,80 @@ class _GameState extends State<Game> {
       ),
     );
   }
+}
+
+class Options extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Options'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/game');
+              },
+              child: Text('Easy'),
+            ),
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/game');
+              },
+              child: Text('Medium'),
+            ),
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/game');
+              },
+              child: Text('Hard'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+playButton(BuildContext) {
+  return SizedBox(
+    width: 100, // set the button width
+    height: 75, // set the button height
+    child: TextButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+            Color(0xFFD9D9D9)), // set the background color to gray
+        foregroundColor: MaterialStateProperty.all<Color>(Colors
+            .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+      ),
+      onPressed: () {
+        Navigator.pushNamed(BuildContext, '/game');
+      },
+      child: Text('play'), // set the button text
+    ),
+  );
+}
+
+optionsButton(BuildContext) {
+  return SizedBox(
+    width: 100, // set the button width
+    height: 75, // set the button height
+    child: TextButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+            Color(0xFFD9D9D9)), // set the background color to gray
+        foregroundColor: MaterialStateProperty.all<Color>(Colors
+            .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+      ),
+      onPressed: () {
+        Navigator.pushNamed(BuildContext, '/options');
+      },
+      child: Text('options'), // set the button text
+    ),
+  );
 }
