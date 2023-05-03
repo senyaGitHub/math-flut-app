@@ -65,9 +65,6 @@ class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Math Quiz Game'),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -81,18 +78,36 @@ class _GameState extends State<Game> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xFFD9D9D9)), // set the background color to gray
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors
+                        .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+                  ),
                   onPressed: () {
                     checkAnswer(num1 + num2);
                   },
                   child: Text('${num1 + num2}'),
                 ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xFFD9D9D9)), // set the background color to gray
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors
+                        .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+                  ),
                   onPressed: () {
                     checkAnswer(Random().nextInt(200));
                   },
                   child: Text('${Random().nextInt(200)}'),
                 ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        Color(0xFFD9D9D9)), // set the background color to gray
+                    foregroundColor: MaterialStateProperty.all<Color>(Colors
+                        .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+                  ),
                   onPressed: () {
                     checkAnswer(Random().nextInt(200));
                   },
