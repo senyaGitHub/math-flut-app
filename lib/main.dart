@@ -48,22 +48,35 @@ class _GameState extends State<Game> {
   int num2 = Random().nextInt(100);
   int answer = 0;
   int score = 0;
+  int questionCount = 0;
 
   void checkAnswer(int userAnswer) {
     setState(() {
-      if (userAnswer == answer) {
-        score++;
+      if (userAnswer == answer) score++;
+
+      questionCount++;
+      if (questionCount >= 10) {
+        // If the user has answered 10 questions, navigate back to the GameMenu screen
+        Navigator.popUntil(context, ModalRoute.withName('/game-menu'));
       } else {
-        score--;
+        num1 = Random().nextInt(100);
+        num2 = Random().nextInt(100);
+        answer = num1 + num2;
       }
-      num1 = Random().nextInt(100);
-      num2 = Random().nextInt(100);
-      answer = num1 + num2;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    // Create a List with the three possible answers
+    List<int> answers = [
+      num1 + num2,
+      Random().nextInt(200),
+      Random().nextInt(200),
+    ];
+    // Shuffle the List to randomize the order of the possible answers
+    answers.shuffle();
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -79,15 +92,15 @@ class _GameState extends State<Game> {
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xFFD9D9D9)), // set the background color to gray
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)),
                     foregroundColor: MaterialStateProperty.all<Color>(Colors
                         .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
                   ),
                   onPressed: () {
-                    checkAnswer(num1 + num2);
+                    checkAnswer(answers[0]);
                   },
-                  child: Text('${num1 + num2}'),
+                  child: Text('${answers[0]}'),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
@@ -97,11 +110,11 @@ class _GameState extends State<Game> {
                         .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
                   ),
                   onPressed: () {
-                    checkAnswer(Random().nextInt(200));
+                    checkAnswer(answers[1]);
                   },
-                  child: Text('${Random().nextInt(200)}'),
+                  child: Text('${answers[1]}'),
                 ),
-                ElevatedButton(
+                TextButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color(0xFFD9D9D9)), // set the background color to gray
@@ -109,9 +122,9 @@ class _GameState extends State<Game> {
                         .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
                   ),
                   onPressed: () {
-                    checkAnswer(Random().nextInt(200));
+                    checkAnswer(answers[2]);
                   },
-                  child: Text('${Random().nextInt(200)}'),
+                  child: Text('${answers[2]}'),
                 ),
               ],
             ),
