@@ -10,7 +10,7 @@ void main() {
       initialRoute: '/game-menu',
       routes: {
         '/game-menu': (context) => GameMenu(),
-        '/game': (context) => Game(),
+        '/game': (context) => Game(level: 1, showAnswers: true),
         '/options': (context) => Options(),
       },
     ),

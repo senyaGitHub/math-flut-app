@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'game.dart';
 
-class Options extends StatelessWidget {
+class Options extends StatefulWidget {
+  @override
+  _OptionsState createState() => _OptionsState();
+}
+
+class _OptionsState extends State<Options> {
+  bool showAnswers = true;
+  int level = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,25 +17,51 @@ class Options extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/game');
+            Switch(
+              value: showAnswers,
+              onChanged: (value) {
+                setState(() {
+                  showAnswers = value;
+                });
               },
-              child: const Text('Easy'),
+            ),
+            const Text('Show answers'),
+            const SizedBox(height: 20.0),
+            DropdownButton(
+              value: level,
+              onChanged: (value) {
+                setState(() {
+                  level = value as int;
+                });
+              },
+              items: [
+                DropdownMenuItem(
+                  value: 1,
+                  child: Text('Level 1'),
+                ),
+                DropdownMenuItem(
+                  value: 2,
+                  child: Text('Level 2'),
+                ),
+                DropdownMenuItem(
+                  value: 3,
+                  child: Text('Level 3'),
+                ),
+              ],
             ),
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/game');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Game(
+                            showAnswers: showAnswers,
+                            level: level,
+                          )),
+                );
               },
-              child: const Text('Medium'),
-            ),
-            const SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/game');
-              },
-              child: const Text('Hard'),
+              child: const Text('Start Game'),
             ),
           ],
         ),
