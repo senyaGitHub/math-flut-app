@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'game.dart';
 
 class Options extends StatelessWidget {
   @override
@@ -13,21 +12,21 @@ class Options extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/game');
               },
-              child: Text('Easy'),
+              child: const Text('Easy'),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/game');
               },
-              child: Text('Medium'),
+              child: const Text('Medium'),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/game');
               },
-              child: Text('Hard'),
+              child: const Text('Hard'),
             ),
           ],
         ),

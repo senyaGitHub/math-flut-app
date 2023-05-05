@@ -90,16 +90,16 @@ class _GameState extends State<Game> {
           children: [
             Text(
               '$num1 $operation $num2 = ?',
-              style: TextStyle(fontSize: 24.0),
+              style: const TextStyle(fontSize: 24.0),
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Color(0xff8c8c8c)),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xff8c8c8c)),
                     foregroundColor: MaterialStateProperty.all<Color>(
                         Colors.black), // set the text color to black
                   ),
@@ -111,7 +111,8 @@ class _GameState extends State<Game> {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xff8c8c8c)), // set the background color to gray
+                        const Color(
+                            0xff8c8c8c)), // set the background color to gray
                     foregroundColor: MaterialStateProperty.all<Color>(
                         Colors.black), // set the text color to black
                   ),
@@ -123,7 +124,8 @@ class _GameState extends State<Game> {
                 TextButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xff8c8c8c)), // set the background color to gray
+                        const Color(
+                            0xff8c8c8c)), // set the background color to gray
                     foregroundColor: MaterialStateProperty.all<Color>(
                         Colors.black), // set the text color to black
                   ),
@@ -134,10 +136,10 @@ class _GameState extends State<Game> {
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
+            const SizedBox(height: 20.0),
             Text(
               'Score: $score',
-              style: TextStyle(fontSize: 24.0),
+              style: const TextStyle(fontSize: 24.0),
             ),
           ],
         ),
