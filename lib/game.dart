@@ -106,7 +106,7 @@ class _GameState extends State<Game> {
     });
   }
 
-  // Function to start the timer
+  // Function  start the timer
   void startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
