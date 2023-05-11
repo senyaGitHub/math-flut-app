@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
 class Game extends StatefulWidget {
@@ -62,13 +61,18 @@ class _GameState extends State<Game> {
     // Generate three possible answers with the correct answer and two other options within a certain range
     answer1 = answer;
     answer2 = answer;
+    answer3 = answer;
     while (answer2 == answer) {
       answer2 = answer + Random().nextInt(10) + 1;
     }
-    answer3 = answer;
+   
     while (answer3 == answer || answer3 < 0) {
       answer3 = answer - Random().nextInt(10) - 1;
+      
     }
+     List<int> answers = [answer1, answer2, answer3];
+     answers.shuffle()
+     return answers;
   }
 
   void checkAnswer(int userAnswer) {
@@ -137,8 +141,7 @@ class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     // Shuffle the List to randomize the order of the possible answers
-    List<int> answers = [answer1, answer2, answer3];
-    answers.shuffle();
+   
 
     return Scaffold(
       body: Center(
