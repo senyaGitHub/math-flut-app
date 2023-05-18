@@ -23,10 +23,7 @@ class _GameState extends State<Game> {
   late Timer _timer = Timer(Duration.zero, () {});
   int _timeRemaining = 0;
 
-  // Generate the possible answers with the correct answer and two other options within a certain range
-  int answer1 = 0;
-  int answer2 = 0;
-  int answer3 = 0;
+  var answers = List.filled(3, 0);
 
   void generateQuestion() {
     num1 = Random().nextInt(12) + 1;
@@ -59,20 +56,17 @@ class _GameState extends State<Game> {
     }
 
     // Generate three possible answers with the correct answer and two other options within a certain range
-    answer1 = answer;
-    answer2 = answer;
-    answer3 = answer;
-    while (answer2 == answer) {
-      answer2 = answer + Random().nextInt(10) + 1;
+    answers[0] = answer;
+    answers[1] = answer;
+    answers[2] = answer;
+    while (answers[1] == answer) {
+      answers[1] = answer + Random().nextInt(10) + 1;
     }
-   
-    while (answer3 == answer || answer3 < 0) {
-      answer3 = answer - Random().nextInt(10) - 1;
-      
+
+    while (answers[2] == answer || answers[2] < 0) {
+      answers[2] = answer - Random().nextInt(10) - 1;
     }
-     List<int> answers = [answer1, answer2, answer3];
-     answers.shuffle()
-     return answers;
+    answers.shuffle();
   }
 
   void checkAnswer(int userAnswer) {
@@ -112,7 +106,7 @@ class _GameState extends State<Game> {
     });
   }
 
-  // Function to start the timer
+  // Function  start the timer
   void startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
@@ -141,7 +135,6 @@ class _GameState extends State<Game> {
   @override
   Widget build(BuildContext context) {
     // Shuffle the List to randomize the order of the possible answers
-   
 
     return Scaffold(
       body: Center(

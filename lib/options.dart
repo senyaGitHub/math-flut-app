@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'game.dart';
 
 class Options extends StatefulWidget {
+  final ThemeMode themeMode;
+  final Function(ThemeMode) onThemeChanged;
+
+  const Options({
+    Key? key,
+    required this.themeMode,
+    required this.onThemeChanged,
+  }) : super(key: key);
+
   @override
   _OptionsState createState() => _OptionsState();
 }
@@ -9,6 +18,7 @@ class Options extends StatefulWidget {
 class _OptionsState extends State<Options> {
   bool showAnswers = true;
   int level = 1;
+  ThemeMode _themeMode = ThemeMode.light; // Add this line
 
   @override
   Widget build(BuildContext context) {
@@ -17,48 +27,24 @@ class _OptionsState extends State<Options> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 20.0),
+            ListTile(leading: const Text('Theme')),
             Switch(
-              value: showAnswers,
+              value: widget.themeMode == ThemeMode.dark,
               onChanged: (value) {
-                setState(() {
-                  showAnswers = value;
-                });
+                widget.onThemeChanged(value ? ThemeMode.dark : ThemeMode.light);
               },
             ),
-            const Text('Show answers'),
-            const SizedBox(height: 20.0),
-            DropdownButton(
-              value: level,
-              onChanged: (value) {
-                setState(() {
-                  level = value as int;
-                });
-              },
-              items: [
-                DropdownMenuItem(
-                  value: 1,
-                  child: Text('Level 1'),
-                ),
-                DropdownMenuItem(
-                  value: 2,
-                  child: Text('Level 2'),
-                ),
-                DropdownMenuItem(
-                  value: 3,
-                  child: Text('Level 3'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Game(
-                            showAnswers: showAnswers,
-                            level: level,
-                          )),
+                    builder: (context) => Game(
+                      showAnswers: showAnswers,
+                      level: level,
+                    ),
+                  ),
                 );
               },
               child: const Text('Start Game'),
