@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'game_menu.dart'; // Import the file containing GameMenu
-import 'game.dart'; // Import the file containing Game
-import 'options.dart'; // Import the file containing Options
+import 'game_menu.dart';
+import 'game.dart';
+import 'options.dart';
 
 void main() {
   runApp(MyApp());

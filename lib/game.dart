@@ -23,7 +23,7 @@ class _GameState extends State<Game> {
   late Timer _timer = Timer(Duration.zero, () {});
   int _timeRemaining = 0;
 
-  var answers = List.filled(3, 0);
+  var answers = List.filled(4, 0);
 
   void generateQuestion() {
     num1 = Random().nextInt(12) + 1;
@@ -59,12 +59,16 @@ class _GameState extends State<Game> {
     answers[0] = answer;
     answers[1] = answer;
     answers[2] = answer;
+    answers[3] = answer;
     while (answers[1] == answer) {
       answers[1] = answer + Random().nextInt(10) + 1;
     }
 
     while (answers[2] == answer || answers[2] < 0) {
       answers[2] = answer - Random().nextInt(10) - 1;
+    }
+    while (answers[3] == answer || answers[3] < 0) {
+      answers[3] = answer - Random().nextInt(10) - 1;
     }
     answers.shuffle();
   }
@@ -99,7 +103,7 @@ class _GameState extends State<Game> {
         // Generate a new question
         generateQuestion();
         // If level conditions are met and a new question is generated, start the timer again
-        if (level >= 2 || level <= 3) {
+        if (level == 2 || level == 3) {
           startTimer();
         }
       }
@@ -126,7 +130,7 @@ class _GameState extends State<Game> {
     super.initState();
     generateQuestion();
 
-    if (level == 2 || level == 3) {
+    if (widget.level == 2 || widget.level == 3) {
       _timeRemaining = 10; // Set the time limit to 10 seconds
       startTimer(); // Start the timer
     }
@@ -141,52 +145,154 @@ class _GameState extends State<Game> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '$num1 $operation $num2 = ?',
-              style: const TextStyle(fontSize: 24.0),
+            Expanded(
+              child: Container(
+                alignment: Alignment.center,
+                child: Text(
+                  '$num1 $operation $num2 = ?',
+                  style: const TextStyle(fontSize: 24.0),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
             const SizedBox(height: 20.0),
             widget.showAnswers
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xff8c8c8c)),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              Colors.black), // set the text color to black
-                        ),
-                        onPressed: () {
-                          checkAnswer(answers[0]);
-                        },
-                        child: Text('${answers[0]}'),
+                ? Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color(0xff3D4451),
+                                  ),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(
+                                        color: const Color(0xff3D4451),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  checkAnswer(answers[0]);
+                                },
+                                child: Container(
+                                  width: 120,
+                                  height: 60,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '${answers[0]}',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color(0xff3D4451),
+                                  ),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(
+                                        color: const Color(0xff3D4451),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  checkAnswer(answers[1]);
+                                },
+                                child: Container(
+                                  width: 120,
+                                  height: 60,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '${answers[1]}',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 16.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color(0xff3D4451),
+                                  ),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(
+                                        color: const Color(0xff3D4451),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  checkAnswer(answers[2]);
+                                },
+                                child: Container(
+                                  width: 120,
+                                  height: 60,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '${answers[2]}',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    const Color(0xff3D4451),
+                                  ),
+                                  shape:
+                                      MaterialStateProperty.all<OutlinedBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      side: BorderSide(
+                                        color: const Color(0xff3D4451),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  checkAnswer(answers[3]);
+                                },
+                                child: Container(
+                                  width: 120,
+                                  height: 60,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    '${answers[3]}',
+                                    style: TextStyle(fontSize: 16.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xff8c8c8c)),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              Colors.black), // set the text color to black
-                        ),
-                        onPressed: () {
-                          checkAnswer(answers[1]);
-                        },
-                        child: Text('${answers[1]}'),
-                      ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xff8c8c8c)),
-                          foregroundColor: MaterialStateProperty.all<Color>(
-                              Colors.black), // set the text color to black
-                        ),
-                        onPressed: () {
-                          checkAnswer(answers[2]);
-                        },
-                        child: Text('${answers[2]}'),
-                      ),
-                    ],
+                    ),
                   )
                 : TextField(
                     controller: TextEditingController(),
