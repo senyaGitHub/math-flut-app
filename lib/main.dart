@@ -4,15 +4,37 @@ import 'game.dart'; // Import the file containing Game
 import 'options.dart'; // Import the file containing Options
 
 void main() {
-  runApp(
-    MaterialApp(
-      title: 'Math Quiz Game',
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Math Surfer',
       initialRoute: '/game-menu',
+      themeMode: _themeMode,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       routes: {
         '/game-menu': (context) => GameMenu(),
         '/game': (context) => Game(level: 1, showAnswers: true),
-        '/options': (context) => Options(),
+        '/options': (context) => Options(
+              themeMode: _themeMode,
+              onThemeChanged: (ThemeMode newThemeMode) {
+                setState(() {
+                  _themeMode = newThemeMode;
+                });
+              },
+            ),
       },
-    ),
-  );
+    );
+  }
 }

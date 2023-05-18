@@ -14,6 +14,8 @@ class GameMenu extends StatelessWidget {
             ),
             const SizedBox(height: 20.0),
             playButton(context),
+            const SizedBox(height: 20.0),
+            optionsButton(context),
           ],
         ),
       ),
@@ -21,21 +23,38 @@ class GameMenu extends StatelessWidget {
   }
 }
 
-playButton(buildContext) {
+Widget playButton(BuildContext context) {
   return SizedBox(
-    width: 200, // set the button width
-    height: 75, // set the button height
+    width: 200,
+    height: 75,
     child: TextButton(
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
-            const Color(0xff8c8c8c)), // set the background color to gray
-        foregroundColor: MaterialStateProperty.all<Color>(Colors
-            .black), // set t: MaterialStateProperty.all<Color>(Color(0xFFD9D9D9)), // set the text color to D9D9D9
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFF8C8C8C)),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
       ),
       onPressed: () {
-        Navigator.pushNamed(buildContext, '/options');
+        Navigator.pushNamed(context, '/game');
       },
-      child: const Text('play'), // set the button text
+      child: const Text('Play'),
+    ),
+  );
+}
+
+Widget optionsButton(BuildContext context) {
+  return SizedBox(
+    width: 200,
+    height: 75,
+    child: TextButton(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFF8C8C8C)),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+      ),
+      onPressed: () {
+        Navigator.pushNamed(context, '/options');
+      },
+      child: const Text('Options'),
     ),
   );
 }
