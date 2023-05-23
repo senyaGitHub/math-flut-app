@@ -17,6 +17,7 @@ class Options extends StatefulWidget {
 class _OptionsState extends State<Options> {
   bool showAnswers = true;
   int level = 1;
+  bool soundEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class _OptionsState extends State<Options> {
       body: Column(
         children: [
           Container(
+            padding: EdgeInsets.only(top: 30.0),
             alignment: Alignment.centerLeft,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
@@ -45,6 +47,27 @@ class _OptionsState extends State<Options> {
                       onChanged: (value) {
                         widget.onThemeChanged(
                             value ? ThemeMode.dark : ThemeMode.light);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Text('Sound'),
+            title: Row(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Switch(
+                      value: soundEnabled,
+                      onChanged: (value) {
+                        // No functionality added for sound switch
+                        setState(() {
+                          soundEnabled = value;
+                        });
                       },
                     ),
                   ),

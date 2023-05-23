@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData.dark(),
       routes: {
         '/game-menu': (context) => GameMenu(),
-        '/game': (context) => Game(level: 1, showAnswers: true),
+        '/game': (context) => Game(level: 1),
         '/options': (context) => Options(
               themeMode: _themeMode,
               onThemeChanged: (ThemeMode newThemeMode) {
